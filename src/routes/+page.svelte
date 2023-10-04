@@ -28,7 +28,7 @@
 		<h1>Add your favorite podcasts</h1>
 		<p>
 			Tap Subscribe on podcasts to add them Headers. You'll see the latest episodes for all your
-			favorite podcasts in one preloadCode.
+			favorite podcasts in one place.
 		</p>
 
 		<a href="/explore" class="neon neon-blue flicker" style:--tag="Explore">Explore</a>

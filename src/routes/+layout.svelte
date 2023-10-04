@@ -92,7 +92,6 @@
 	main {
 		margin-right: 1rem;
 		margin-left: 1rem;
-		max-width: 960px;
 		flex-grow: 1;
 		height: calc(100% - 121px);
 		overflow: hidden;
