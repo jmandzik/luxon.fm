@@ -1,0 +1,26 @@
+@layer reset, base, components;
+
+@import 'reset.css' layer(reset);
+@import 'base.css' layer(base);
+@import 'components.css' layer(components);
+
+body {
+	background-color: #020617;
+	font-family: 'Open Sans', sans-serif;
+	color: #e2e8f0;
+	/* padding: 1rem; */
+	display: flex;
+	flex-direction: column;
+	height: 100dvh;
+	overflow: hidden;
+}
+
+button {
+	padding: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	[style*='--tag'] {
+		view-transition-name: var(--tag);
+	}
+}

@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "neon-tubes-2-regular";
+  src:
+    url("/fonts/neon.otf") format("woff"),
+    url("/fonts/neon.otf") format("opentype"),
+    url("/fonts/neon.otf") format("truetype");
+}
