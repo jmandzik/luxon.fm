@@ -25,6 +25,7 @@
 	"type": "module",
 	"dependencies": {
 		"@types/dom-view-transitions": "^1.0.2",
-		"podcast-api": "^2.0.4"
+		"podcast-api": "^2.0.4",
+		"podcastdx-client": "^5.1.0"
 	}
 }

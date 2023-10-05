@@ -8,11 +8,16 @@
 			<input type="search" name="term" placeholder="Search podcasts..." />
 		</form>
 		<ul>
-			{#each data.search_results || [] as podcast}
+			{#each data.search_results as podcast}
 				<li>
 					<a href={`/podcast/${podcast.id}`}>
-						<img src={podcast.thumbnail} alt={podcast.collectionName} loading="lazy" />
-						<p>{podcast.title_original}</p>
+						<img
+							src={podcast.image}
+							alt={podcast.author}
+							loading="lazy"
+							style:--tag={`p-${podcast.id}`}
+						/>
+						<p>{podcast.title}</p>
 					</a>
 				</li>
 			{/each}
@@ -21,12 +26,12 @@
 	<section>
 		<h2>Explore</h2>
 		<ul>
-			{#each data.recommendations as podcast}
+			{#each [] as podcast}
 				<li>
 					<a href={`/podcast/${podcast.id}`}>
 						<img
-							src={podcast.thumbnail}
-							alt={podcast.collectionName}
+							src={podcast.image}
+							alt={podcast.author}
 							loading="lazy"
 							style:--tag={`p-${podcast.id}`}
 						/>
