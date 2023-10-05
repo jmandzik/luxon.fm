@@ -3,7 +3,12 @@
 
 	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { player_store } from '$lib/stores';
+	import { onMount } from 'svelte';
 
+	onMount(() => {
+		$player_store.audio = document.querySelector('audio');
+	});
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
 
@@ -26,6 +31,10 @@
 <main>
 	<slot />
 </main>
+
+<section class:hidden={!$player_store.episode}>
+	<audio controls></audio>
+</section>
 {#if $page.data?.podcasts?.length || $page.url.pathname === '/explore'}
 	<footer>
 		<nav>

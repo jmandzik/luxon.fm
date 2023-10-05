@@ -19,9 +19,9 @@
 							src={podcast.image}
 							alt={podcast.author}
 							loading="lazy"
-							style:--tag={`p-${podcast.id}`}
+							style:--tag={`podcast-image-${podcast.id}`}
 						/>
-						<p>{podcast.title}</p>
+						<p style:--tag={`podcast-title-${podcast.id}`}>{podcast.title}</p>
 					</a>
 				</li>
 			{/each}
