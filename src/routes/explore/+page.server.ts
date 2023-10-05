@@ -1,4 +1,4 @@
-import { client } from '$lib/utils';
+import { client } from '$lib/api';
 
 export async function load({ url }) {
 	const term = url.searchParams.get('term');

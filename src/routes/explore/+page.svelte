@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	export let data;
+
+	let term = $page.url.searchParams.get('term') ?? '';
 </script>
 
 <div class="container">
 	<section>
 		<form id="search_form">
-			<input type="search" name="term" placeholder="Search podcasts..." />
+			<input type="search" name="term" bind:value={term} placeholder="Search podcasts..." />
 		</form>
 		<ul>
 			{#each data.search_results as podcast}
@@ -77,6 +81,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
+		margin-bottom: 1rem;
 	}
 
 	input {
