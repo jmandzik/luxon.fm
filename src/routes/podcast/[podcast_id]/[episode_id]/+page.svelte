@@ -1,58 +1,17 @@
 <script lang="ts">
-	import { player_store } from '$lib/stores';
+	import { audio_store } from '$lib/stores';
 	import { localized_date } from '$lib/utils';
 
 	export let data;
+
 	const on_play_pause = () => {
-		if ($player_store.episode) {
-			if ($player_store.state === 'playing') {
-				$player_store.pause();
-				$player_store.state = 'paused';
-			} else {
-				if ($player_store.episode.id !== data.episode.id) {
-					$player_store = {
-						episode: data.episode,
-						state: 'playing',
-						current_time: 0,
-						play: () => {
-							$player_store.audio.play();
-							$player_store.state = 'playing';
-							return;
-						},
-						audio: $player_store.audio,
-						pause: () => {
-							$player_store.audio.pause();
-						},
-						stop: () => {
-							$player_store.audio.pause();
-							$player_store.audio.currentTime = 0;
-						}
-					};
-					$player_store.audio.src = data.episode.enclosureUrl;
-					$player_store.play();
-				}
-			}
+		if (!$audio_store.episode) {
+			audio_store.set_episode(data.episode);
+		}
+		if (!$audio_store.is_playing) {
+			audio_store.play();
 		} else {
-			$player_store = {
-				episode: data.episode,
-				state: 'playing',
-				current_time: 0,
-				play: () => {
-					$player_store.audio.play();
-					$player_store.state = 'playing';
-					return;
-				},
-				audio: $player_store.audio,
-				pause: () => {
-					$player_store.audio.pause();
-				},
-				stop: () => {
-					$player_store.audio.pause();
-					$player_store.audio.currentTime = 0;
-				}
-			};
-			$player_store.audio.src = data.episode.enclosureUrl;
-			$player_store.play();
+			audio_store.pause();
 		}
 	};
 </script>
@@ -84,7 +43,7 @@
 	</section>
 	<section>
 		<button class="neon neon-blue" on:click={on_play_pause}>
-			{#if $player_store.episode?.id === data.episode.id && $player_store.state === 'playing'}
+			{#if $audio_store.is_playing}
 				<span class="material-symbols-outlined"> pause </span>
 				<span>Pause</span>
 			{:else}

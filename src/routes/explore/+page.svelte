@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 
 	export let data;
-
+	console.log(data);
 	let term = $page.url.searchParams.get('term') ?? '';
 </script>
 
@@ -30,7 +30,7 @@
 	<section>
 		<h2>Explore</h2>
 		<ul>
-			{#each [] as podcast}
+			{#each data.suggestions as podcast}
 				<li>
 					<a href={`/podcast/${podcast.id}`}>
 						<img
