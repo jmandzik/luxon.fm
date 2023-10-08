@@ -4,24 +4,25 @@ interface AudioState {
 	episode: any;
 	current_time: number;
 	is_playing: boolean;
+	audio_element: HTMLAudioElement | null;
 }
 
 interface AudioStore extends Writable<AudioState> {
 	set_audio_element: (new_audio_element: HTMLAudioElement) => void;
 	set_episode: (episode: any) => void;
-	is_playing: () => boolean;
 	play: () => Promise<void>;
 	pause: () => void;
 }
 
 function create_audio_store(): AudioStore {
+	let audio_element: HTMLAudioElement | null = null;
+
 	const { subscribe, set, update } = writable<AudioState>({
 		episode: null,
 		current_time: 0,
-		is_playing: false
+		is_playing: false,
+		audio_element
 	});
-
-	let audio_element: HTMLAudioElement | null = null;
 
 	function attach_time_update_listener(): void {
 		if (audio_element) {
@@ -38,7 +39,7 @@ function create_audio_store(): AudioStore {
 
 		set_audio_element: (new_audio_element: HTMLAudioElement) => {
 			audio_element = new_audio_element;
-			// attach_time_update_listener();
+			attach_time_update_listener();
 		},
 		set_episode: (episode: any) => {
 			update((state) => ({ ...state, episode }));

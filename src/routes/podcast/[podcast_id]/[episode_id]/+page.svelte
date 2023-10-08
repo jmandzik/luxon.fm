@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { audio_store } from '$lib/stores';
-	import { localized_date } from '$lib/utils';
+	import { format_duration, localized_date } from '$lib/utils';
 
 	export let data;
 
@@ -41,7 +41,7 @@
 			{data.episode.title}
 		</h2>
 	</section>
-	<section>
+	<section class="play-pause">
 		<button class="neon neon-blue" on:click={on_play_pause}>
 			{#if $audio_store.is_playing}
 				<span class="material-symbols-outlined"> pause </span>
@@ -51,6 +51,11 @@
 				<span>Play</span>
 			{/if}
 		</button>
+		<p>
+			{format_duration(Math.round($audio_store.current_time))} / {format_duration(
+				data.episode.duration
+			)}
+		</p>
 	</section>
 	<p>{@html data.episode.description}</p>
 </div>
@@ -71,6 +76,12 @@
 
 	section {
 		width: 100%;
+	}
+
+	.play-pause {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	header {
 		display: flex;

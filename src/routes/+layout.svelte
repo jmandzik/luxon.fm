@@ -28,7 +28,7 @@
 <main>
 	<slot />
 </main>
-<section class:hidden={!$audio_store.is_playing}>
+<section class:hidden={!$audio_store.episode}>
 	<AudioPlayer />
 </section>
 
@@ -103,11 +103,15 @@
 		overflow: hidden;
 	}
 
+	section {
+		border-top: 1px solid #12172b;
+		box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.1);
+	}
+
 	footer ul {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 		gap: 1rem;
-		/* margin-top: 1rem; */
 	}
 </style>

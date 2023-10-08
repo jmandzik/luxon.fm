@@ -9,3 +9,8 @@
 .hidden {
 	display: none;
 }
+
+a[href^='https'] {
+	color: rgb(88, 205, 255);
+	text-decoration: none;
+}
