@@ -43,7 +43,7 @@
 	</section>
 	<section class="play-pause">
 		<button class="neon neon-blue" on:click={on_play_pause}>
-			{#if $audio_store.is_playing}
+			{#if $audio_store.is_playing && $audio_store.episode.id === data.episode.id}
 				<span class="material-symbols-outlined"> pause </span>
 				<span>Pause</span>
 			{:else}

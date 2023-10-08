@@ -43,13 +43,11 @@ function create_audio_store(): AudioStore {
 		},
 		set_episode: (episode: any) => {
 			update((state) => ({ ...state, episode }));
-			console.log(audio_element);
 			if (audio_element) {
 				audio_element.src = episode.enclosureUrl;
 			}
 		},
 		play: async () => {
-			console.log(audio_element);
 			if (audio_element) {
 				await audio_element.play();
 				update((state) => ({ ...state, is_playing: true }));

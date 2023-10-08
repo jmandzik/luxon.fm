@@ -28,3 +28,48 @@ export function format_duration(seconds: number): string {
 
 	return formatted.trim();
 }
+
+export function debounce(func: Function, wait: number): Function {
+	let timeoutId: NodeJS.Timeout | null = null;
+
+	return (...args: any[]) => {
+		const context = this;
+
+		const executeFunction = () => {
+			func.apply(context, args);
+			timeoutId = null;
+		};
+
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+		}
+
+		timeoutId = setTimeout(executeFunction, wait);
+	};
+}
+
+export function throttle(func: Function, limit: number): Function {
+	let lastFunc: NodeJS.Timeout;
+	let lastRan: number;
+
+	return function (...args: any[]) {
+		const context = this;
+
+		if (!lastRan) {
+			func.apply(context, args);
+			lastRan = Date.now();
+		} else {
+			clearTimeout(lastFunc);
+
+			lastFunc = setTimeout(
+				function () {
+					if (Date.now() - lastRan >= limit) {
+						func.apply(context, args);
+						lastRan = Date.now();
+					}
+				},
+				limit - (Date.now() - lastRan)
+			);
+		}
+	};
+}
