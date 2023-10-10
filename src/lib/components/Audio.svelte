@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { audio_store } from '$lib/stores';
-	import { throttle } from '$lib/utils';
 	import { onMount } from 'svelte';
 
 	let audio_el: HTMLAudioElement;
@@ -10,11 +9,6 @@
 		: 0;
 
 	$: track_fill = `${($audio_store.current_time / ($audio_store.episode?.duration || 1)) * 100}%`;
-	$: console.log({ progress });
-	$: console.log({ current_time: $audio_store.current_time });
-	$: console.log({
-		track_fill
-	});
 
 	onMount(() => {
 		audio_store.set_audio_element(audio_el);
@@ -68,7 +62,6 @@
 		justify-content: space-between;
 		background-color: #020617;
 		color: #e2e8f0;
-		height: 48px;
 		padding: 1rem;
 		width: 100%;
 	}
@@ -99,8 +92,8 @@
 
 		@media (hover: none) {
 			& {
-				--thumb-size: 30px;
-				--thumb-offset: -14px;
+				--thumb-size: 14px;
+				--thumb-offset: -5px;
 			}
 		}
 
@@ -157,34 +150,6 @@
 		}
 	}
 
-	.progress_bar {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 2px;
-		background: #00ffff;
-		box-shadow:
-			0 0 5px #00ffff,
-			0 0 10px #00ffff;
-		width: calc(100% * var(--progress));
-		transition: width 0.3s;
-	}
-
-	.progress_circle {
-		position: absolute;
-		cursor: grab;
-		top: -5px;
-		left: calc((100% - 10px) * var(--progress));
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: #00ffff;
-		box-shadow:
-			0 0 5px #00ffff,
-			0 0 10px #00ffff;
-		transition: left 0.3s;
-	}
-
 	.track-title {
 		flex-grow: 1;
 		text-align: center;
@@ -195,5 +160,10 @@
 		width: 32px;
 		background-size: cover;
 		cursor: pointer;
+	}
+
+	button {
+		display: flex;
+		align-items: center;
 	}
 </style>
