@@ -1,10 +1,23 @@
 <script lang="ts">
 	import { localized_date } from '$lib/utils';
-
+	import { onMount } from 'svelte';
+	import { save_podcast } from '$lib/crud';
 	export let data;
 
-	const on_subscribe = () => {
-		console.log('subscribe');
+	let opfs_root: FileSystemDirectoryHandle;
+
+	onMount(async () => {
+		opfs_root = await navigator.storage.getDirectory();
+	});
+	const on_subscribe = async () => {
+		// fetch the most recent episode via enclosureUrl
+		const response = await fetch(data.episodes[0].enclosureUrl);
+		if (!response.ok) {
+			console.error(`Failed to fetch ${data.episodes[0].enclosureUrl}`);
+		}
+		const buffer = await response.arrayBuffer();
+
+		await save_podcast(opfs_root, data.podcast.id, data.episodes[0].id, buffer);
 	};
 </script>
 
