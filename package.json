@@ -25,6 +25,7 @@
 	"type": "module",
 	"dependencies": {
 		"@types/dom-view-transitions": "^1.0.2",
+		"@vercel/analytics": "^1.1.1",
 		"podcast-api": "^2.0.4",
 		"podcastdx-client": "^5.1.0"
 	}

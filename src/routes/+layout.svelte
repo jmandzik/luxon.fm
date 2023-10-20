@@ -5,6 +5,10 @@
 	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { audio_store } from '$lib/stores';
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	inject({ mode: dev ? 'development' : 'production' });
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
